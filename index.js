@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const connectdb = require('./connectDB');
 const items = require('./routers/items');
-const { config } = require('./config/config');
+//const { config } = require('./config/config');
 
 const app = express();
 
