@@ -1,11 +1,12 @@
 const { Item } = require('../models/itemModel');
 const moment = require('moment');
 const tz = require('moment-timezone');
+const { encrypt, decrypt } = require('./crypto');
 require('moment/locale/pl.js');
 
 async function postItemToList(req, res) {
     const date = moment(new Date()).tz('Europe/Warsaw').format('ll');
-
+    
     const item = new Item({
         content: req.body.content,
         isDone: req.body.isDone,
