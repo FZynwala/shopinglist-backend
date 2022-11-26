@@ -1,5 +1,4 @@
 const express = require('express');
-const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const connectdb = require('./connectDB');
@@ -11,9 +10,7 @@ require('dotenv').config();
 
 const app = express();
 
-module.exports.handler = serverless(app);
-
-// require('../prod')(app);
+require('./prod')(app);
 
 // config();
 connectdb.connectToDB();
@@ -45,9 +42,8 @@ let allowCrossDomain = function (req, res, next) {
 
 app.use(allowCrossDomain);
 app.use(cookieParser());
-app.use('/.netlify/functions/index/items', items);
-app.use('/.netlify/functions/index/users', users);
-app.use('/.netlify/functions/index/health', health);
+app.use('/items', items);
+app.use('/users', users);
 
 const port = process.env.PORT || 8000;
 app.listen(port);
