@@ -35,7 +35,7 @@ async function loginUser(req, res) {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('Invalid email or password.');
 
-    const token = jwt.sign({ _id: user._id }, 'jwtPrivateKey');
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATE_KEY);
 
     res.send(token);
 }
