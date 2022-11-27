@@ -10,7 +10,7 @@ async function postItemToList(req, res) {
     const item = new Item({
         content: req.body.content,
         isDone: req.body.isDone,
-        userId: req.body.userId,
+        userId: req.user._id,
         create_date: date,
     });
 
@@ -24,7 +24,7 @@ async function postItemToList(req, res) {
 
 async function getItemFromList(req, res) {
     try {
-        const items = await Item.find({ userId: req.params.userId });
+        const items = await Item.find({ userId: req.user._id });
 
         if (!items) {
             return res.status(404).send('There is no item for given user');
